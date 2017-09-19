@@ -1,14 +1,6 @@
 var express=require('express');
 var app=express();
-
-
-var fortunes=[
-	'一二三四五',
-	'上山打老虎',
-	'老虎打不着',
-	'打到小松鼠',
-	'哈哈哈哈哈'
-];	
+var fortune=require('./lib/fortune.js');
 	//设置handlebars视图引擎
 var handlebars=require('express3-handlebars').create({defaultLayout:'main'});
 
@@ -23,8 +15,8 @@ var handlebars=require('express3-handlebars').create({defaultLayout:'main'});
 		res.render('home');
 	});
 	app.get('/about',function(req,res){
-		var randomFortune=fortunes[Math.floor(Math.random()*fortunes.length)];
-		res.render('about',{fortunes:randomFortune});
+		
+		res.render('about',{fortune:fortune.getFortune()});
 	})
 
 
